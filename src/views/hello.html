@@ -26,9 +26,25 @@
       
      /* background-color: lightgray;*/
     }
+    .text-list {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: transparent;
+      padding: 10px;
+      /*border: 1px solid #ccc;*/
+    }
 
-    
+    .show {
+      display: block;
+    }
 
+    .containers {
+      display: flex;
+      align-items: center;
+      /*justify-content: center;*/
+    }
 
     
   </style>
@@ -37,21 +53,44 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div>
-      <h1>Hello, Farah</h1>
+      <div class="containers">
+        
+        <h1>Bonjour, Farah </h1>
+        <img src="https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/17315/little-penguin-clipart-md.png" width="82" height="82" alt="Hello, Farah" style="margin-left: 10px;" />
+        <h1 style="margin-left: 10px;"> c'est quoi votre humour ajourd'hui ?</h1><br><br>
+      
+      </div>
       <span>
-        <p> Humour du jour</p><br><br>
-       <!-- <p id="hubName"></p>-->
+        
         <div class="container">
     <div class="column">
-     <img src="https://cdn.pixabay.com/photo/2021/05/24/09/15/emoji-6278332_1280.png"  width="100" height="100" alt="Ma image" /> 
+     <img src="https://cdn.pixabay.com/photo/2021/05/24/09/15/emoji-6278332_1280.png"  width="100" height="100" alt="Ma image" onclick="toggleList(this)" /> 
+     <ul class="text-list">
+      <li>Très motivé(e)</li>
+      <li>Motivé(e)</li>
+      
+  </ul>
 
     </div>
     <div class="column">
-      <img src="https://cdn-icons-png.flaticon.com/512/9489/9489992.png" width="100" height="100" alt="Ma image" />
+      <img src="https://cdn-icons-png.flaticon.com/512/9489/9489992.png" width="110" height="110" alt="Ma image" onclick="toggleList(this)" />
+      <ul class="text-list">
+        <li>Pas trop</li>
+        <li>Neutre</li>
+        <li>à modifier***</li>
+    </ul>
       
     </div>
     <div class="column">
-      <img src="https://cdn.pixabay.com/photo/2020/12/19/02/50/emoji-5843434_640.png" width="100" height="100" alt="Ma image" />
+      <img src="https://cdn.pixabay.com/photo/2020/12/19/02/50/emoji-5843434_640.png" width="100" height="100" alt="Ma image" onclick="toggleList(this)" />
+      <ul class="text-list">
+        <li>Texte A</li>
+        <li>Texte B</li>
+        <li>Texte C</li>
+        <li>Texte D</li>
+        <li>Texte E</li>
+        <li>Texte F</li>
+    </ul>
     </div>
   </div>
       </span>
@@ -60,6 +99,10 @@
     <script type="text/javascript">
       // Hide the loading indicator
       microsoftTeams.appInitialization.notifySuccess();
+      function toggleList(image) {
+            var textList = image.nextElementSibling;
+            textList.classList.toggle("show");
+        }
     </script>
   </body>
 </html>
