@@ -1,5 +1,7 @@
 <html lang="en">
   <head>
+
+    
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/favicon.ico" />
@@ -11,47 +13,65 @@
     ></script>
     <script src="/static/scripts/teamsapp.js"></script>
     <title>Microsoft Teams Tab</title>
+
     <style>
-    .container {
-      display: flex;
-      justify-content: center;
-    }
-
-    .column {
-      flex: 1;
-      margin: 20px;
-      padding: 5px;
-      position: relative;
-      cursor: pointer;
       
-     /* background-color: lightgray;*/
-    }
-    .text-list {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background-color: transparent;
-      padding: 10px;
-      /*border: 1px solid #ccc;*/
-    }
 
-    .show {
-      display: block;
-    }
+.container {
+    display: flex;
+    justify-content: center;
+  }
 
-    .containers {
-      display: flex;
-      align-items: center;
-      /*justify-content: center;*/
-    }
-
+  .column {
+    flex: 1;
+    margin: 20px;
+    padding: 20px;
+    position: relative;
+    cursor: pointer;
     
-  </style>
+   /* background-color: lightgray;*/
+  }
+  .text-list {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: transparent;
+    padding: 10px;
+    /*border: 1px solid #ccc;*/
+  }
+
+  .show {
+    display: block;
+  }
+
+  .containers {
+    display: flex;
+    align-items: center;
+    /*justify-content: center;*/
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .column-text {
+    flex: 1;
+   /* margin: 20px;
+    padding: 20px;*/
+    position: relative;
+    cursor: pointer;
+    
+    background-color: lightgray;
+  }
+    </style>
+    
   </head>
 
   <body>
+    
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="div1">
     <div>
       <div class="containers">
         
@@ -66,8 +86,8 @@
     <div class="column">
      <img src="https://cdn.pixabay.com/photo/2021/05/24/09/15/emoji-6278332_1280.png"  width="100" height="100" alt="Ma image" onclick="toggleList(this)" /> 
      <ul class="text-list">
-      <li>Très motivé(e)</li>
-      <li>Motivé(e)</li>
+      <li onclick="replaceDiv(this)">Très motivé(e)</li>
+      <li onclick="replaceDiv(this)">Motivé(e)</li>
       
   </ul>
 
@@ -75,26 +95,48 @@
     <div class="column">
       <img src="https://cdn-icons-png.flaticon.com/512/9489/9489992.png" width="110" height="110" alt="Ma image" onclick="toggleList(this)" />
       <ul class="text-list">
-        <li>Pas trop</li>
-        <li>Neutre</li>
-        <li>à modifier***</li>
+        <li onclick="replaceDiv(this)">Pas trop</li>
+        <li onclick="replaceDiv(this)">Neutre</li>
+        <li onclick="replaceDiv(this)">à modifier***</li>
     </ul>
       
     </div>
     <div class="column">
       <img src="https://cdn.pixabay.com/photo/2020/12/19/02/50/emoji-5843434_640.png" width="100" height="100" alt="Ma image" onclick="toggleList(this)" />
       <ul class="text-list">
-        <li>Texte A</li>
-        <li>Texte B</li>
-        <li>Texte C</li>
-        <li>Texte D</li>
-        <li>Texte E</li>
-        <li>Texte F</li>
+        <li onclick="replaceDiv(this)">Texte A</li>
+        <li onclick="replaceDiv(this)">Texte B</li>
+        <li onclick="replaceDiv(this)">Texte C</li>
+        <li onclick="replaceDiv(this)">Texte D</li>
+        <li onclick="replaceDiv(this)">Texte E</li>
+        <li onclick="replaceDiv(this)">Texte F</li>
     </ul>
     </div>
   </div>
       </span>
     </div>
+  </div>
+
+  <div id="div2" class="containers hidden">
+    <div style="display: flex; justify-content: flex-start; margin-bottom: 10px;">
+      <button onclick="showDiv1()">Retour</button>
+    </div>
+    <span>
+      <div class="containers">
+        <center>
+        <div class="column-text" style="flex-grow: 1; margin-top: 10px; margin: 20px;">
+          <p>Contenu de la nouvelle div gggg</p><br>
+          <p>heey</p><br>
+        </div>
+      </center>
+      </div>
+    </span>
+  </div>
+  
+  
+  
+  
+  
     
     <script type="text/javascript">
       // Hide the loading indicator
@@ -103,6 +145,16 @@
             var textList = image.nextElementSibling;
             textList.classList.toggle("show");
         }
+
+        function replaceDiv(item) {
+      document.getElementById("div1").classList.add("hidden");
+      document.getElementById("div2").classList.remove("hidden");
+    }
+
+    function showDiv1() {
+      document.getElementById("div1").classList.remove("hidden");
+      document.getElementById("div2").classList.add("hidden");
+    }
     </script>
   </body>
 </html>
