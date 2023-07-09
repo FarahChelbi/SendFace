@@ -62,8 +62,31 @@
     position: relative;
     cursor: pointer;
     
-    background-color: lightgray;
+    /*background-color: lightgray;*/
   }
+
+
+  .selected-image-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.selected-image-container img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border: 1px solid #ccc;
+}
+
+.div2 {
+  width: 100vw;
+  height: 100vh;
+  background-color: lightblue;
+}
+
     </style>
     
   </head>
@@ -75,7 +98,7 @@
     <div>
       <div class="containers">
         
-        <h1>Bonjour, Farah </h1>
+        <h1 id="username">Bonjour Farah</h1>
         <img src="https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/17315/little-penguin-clipart-md.png" width="82" height="82" alt="Hello, Farah" style="margin-left: 10px;" />
         <h1 style="margin-left: 10px;"> c'est quoi votre humour ajourd'hui ?</h1><br><br>
       
@@ -84,77 +107,142 @@
         
         <div class="container">
     <div class="column">
-     <img src="https://cdn.pixabay.com/photo/2021/05/24/09/15/emoji-6278332_1280.png"  width="100" height="100" alt="Ma image" onclick="toggleList(this)" /> 
+     <img id="content" src="https://cdn.pixabay.com/photo/2021/05/24/09/15/emoji-6278332_1280.png"  width="100" height="100" alt="Ma image" onclick="toggleList(this)" /> 
      <ul class="text-list">
-      <li onclick="replaceDiv(this)">Très motivé(e)</li>
-      <li onclick="replaceDiv(this)">Motivé(e)</li>
-      
-  </ul>
+      <li id="content1" onclick="replaceDiv(this)">Très motivé(e)</li>
+      <li id="content2" onclick="replaceDiv(this)">Motivé(e)</li>
+    </ul>
 
     </div>
     <div class="column">
-      <img src="https://cdn-icons-png.flaticon.com/512/9489/9489992.png" width="110" height="110" alt="Ma image" onclick="toggleList(this)" />
+      <img id="neutre" src="https://cdn-icons-png.flaticon.com/512/9489/9489992.png" width="110" height="110" alt="Ma image" onclick="toggleList(this)" />
       <ul class="text-list">
-        <li onclick="replaceDiv(this)">Pas trop</li>
-        <li onclick="replaceDiv(this)">Neutre</li>
-        <li onclick="replaceDiv(this)">à modifier***</li>
+        <li id="neutre1" onclick="replaceDiv(this)">Pas trop</li>
+        <li id="neutre2" onclick="replaceDiv(this)">Neutre</li>
+        <li id="neutre3" onclick="replaceDiv(this)">à modifier***</li>
     </ul>
       
     </div>
     <div class="column">
-      <img src="https://cdn.pixabay.com/photo/2020/12/19/02/50/emoji-5843434_640.png" width="100" height="100" alt="Ma image" onclick="toggleList(this)" />
+      <img id="sad" src="https://cdn.pixabay.com/photo/2020/12/19/02/50/emoji-5843434_640.png" width="100" height="100" alt="Ma image" onclick="toggleList(this)" />
       <ul class="text-list">
-        <li onclick="replaceDiv(this)">Texte A</li>
-        <li onclick="replaceDiv(this)">Texte B</li>
-        <li onclick="replaceDiv(this)">Texte C</li>
-        <li onclick="replaceDiv(this)">Texte D</li>
-        <li onclick="replaceDiv(this)">Texte E</li>
-        <li onclick="replaceDiv(this)">Texte F</li>
+        <li id="sad1" onclick="replaceDiv(this)">Texte A</li>
+        <li id="sad2" onclick="replaceDiv(this)">Texte B</li>
+        <li id="sad3" onclick="replaceDiv(this)">Texte C</li>
+        <li id="sad4" onclick="replaceDiv(this)">Texte D</li>
+        <li id="sad5" onclick="replaceDiv(this)">Texte E</li>
+        <li id="sad6" onclick="replaceDiv(this)">Texte F</li>
     </ul>
     </div>
   </div>
       </span>
     </div>
   </div>
-
-  <div id="div2" class="containers hidden">
-    <div style="display: flex; justify-content: flex-start; margin-bottom: 10px;">
+  
+<!-- ****************************  Ici la 2eme div (apres click sur image)******************************************* -->
+  <div id="div2" class="containers hidden" style="width: relative; height: relative;">
+    
+    <div style="position: fixed; top: 10px; left: 50px; transform: translate(-50%, 0);">
       <button onclick="showDiv1()">Retour</button>
     </div>
-    <span>
-      <div class="containers">
-        <center>
+
+    
+    <span style="margin-top: 0; margin-bottom: 0;">
+      <div class="column">
+        
         <div class="column-text" style="flex-grow: 1; margin-top: 10px; margin: 20px;">
-          <p>Contenu de la nouvelle div gggg</p><br>
-          <p>heey</p><br>
+          <h2>text eli ena nsitou ........................</h2>
+          <textarea id="myTextarea" style="width: 500px; height: 100px;" placeholder="Entrez votre texte ici"></textarea>
+          <h2>Votre Feedback: </h2>
+          <textarea id="myTextarea" style="width: 500px; height: 100px;" placeholder="Entrez votre Feedback ici"></textarea>
+          <button style="margin-left: 10px;">Valider</button>
         </div>
-      </center>
+      
       </div>
     </span>
+    <div class="selected-image-container" style="position: fixed; top: 0; right: 0; transform: translate(-50%, 0);">
+      <img id="selectedImage" src="" alt="Selected Image">
+    </div>
   </div>
-  
-  
-  
-  
-  
     
     <script type="text/javascript">
+
+
       // Hide the loading indicator
       microsoftTeams.appInitialization.notifySuccess();
+
+      microsoftTeams.initialize();
+
+microsoftTeams.getContext(function(context) {
+  //var userDisplayName = context.userDisplayName || context.upn || context.loginHint || 'Utilisateur'; // Récupère le nom d'affichage de l'utilisateur
+
+  var userDisplayName = context.userDisplayName || '';
+  
+  if (!userDisplayName) {
+    var email = context.userPrincipalName || context.loginHint || '';
+    userDisplayName = email.split('@')[0];
+  }
+  document.getElementById("username").innerHTML="Bonjour, "+userDisplayName;
+});
+
+
+
+  
+      /*
       function toggleList(image) {
             var textList = image.nextElementSibling;
             textList.classList.toggle("show");
         }
+*/
+
+function toggleList(image) {
+  var textLists = document.querySelectorAll('.text-list'); // Sélectionner tous les éléments de classe text-list
+
+  // Parcourir tous les éléments de classe text-list
+  textLists.forEach(function(textList) {
+    // Vérifier si l'élément textList est celui associé à l'image cliquée
+    if (textList.previousElementSibling === image) {
+      // Afficher ou masquer l'élément textList en fonction de son état actuel
+      textList.classList.toggle('show');
+    } else {
+      // Masquer tous les autres éléments text-list
+      textList.classList.remove('show');
+    }
+  });
+}
 
         function replaceDiv(item) {
       document.getElementById("div1").classList.add("hidden");
       document.getElementById("div2").classList.remove("hidden");
+
+      const textId = item.id;
+      var imageId;
+      var srcValue;
+      if(textId=="content1" || textId=="content2"){
+        var imageElement = document.getElementById('content');
+        srcValue = imageElement.src;
+      }
+      else if(textId == "neutre1" || textId == "neutre2" || textId == "neutre3"){
+        var imageElement = document.getElementById('neutre');
+        srcValue = imageElement.src;
+      }
+      else if(textId == "sad1" || textId == "sad2" || textId == "sad3" || textId == "sad4" || textId == "sad5" || textId == "sad6"){
+        var imageElement = document.getElementById('sad');
+        srcValue = imageElement.src;
+      }
+
+      const selectedImageElement = document.getElementById("selectedImage");
+  selectedImageElement.src = srcValue;
+      
+      
     }
 
     function showDiv1() {
       document.getElementById("div1").classList.remove("hidden");
       document.getElementById("div2").classList.add("hidden");
     }
+
+    
     </script>
   </body>
 </html>
