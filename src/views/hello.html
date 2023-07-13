@@ -1,7 +1,7 @@
 <html lang="en">
   <head>
 
-    
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.11.0/js/MicrosoftTeams.min.js"></script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/favicon.ico" />
@@ -12,14 +12,15 @@
       crossorigin="anonymous"
     ></script>
     <script src="/static/scripts/teamsapp.js"></script>
+    
+
     <title>Microsoft Teams Tab</title>
 
     <style>
-      
-
 .container {
     display: flex;
     justify-content: center;
+    
   }
 
   .column {
@@ -38,9 +39,9 @@
     left: 0;
     background-color: transparent;
     padding: 10px;
-    /*border: 1px solid #ccc;*/
+    
   }
-
+  
   .show {
     display: block;
   }
@@ -48,7 +49,7 @@
   .containers {
     display: flex;
     align-items: center;
-    /*justify-content: center;*/
+    justify-content: center;
   }
 
   .hidden {
@@ -78,13 +79,25 @@
   width: 100px;
   height: 100px;
   object-fit: cover;
-  border: 1px solid #ccc;
+  /*border: 1px solid #ccc;*/
 }
 
 .div2 {
   width: 100vw;
   height: 100vh;
   background-color: lightblue;
+}
+
+.child {
+ /* width: 50px;
+  height: 50px;*/
+  
+  /* Centrer verticalement et horizontalement */
+  position: absolute;
+  
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
     </style>
@@ -96,42 +109,46 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="div1">
     <div>
-      <div class="containers">
+      <div class="containers" >
         
-        <h1 id="username">Bonjour Farah</h1>
+        <h1 id="username" style="text-align: center;"></h1>
         <img src="https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/17315/little-penguin-clipart-md.png" width="82" height="82" alt="Hello, Farah" style="margin-left: 10px;" />
-        <h1 style="margin-left: 10px;"> c'est quoi votre humour ajourd'hui ?</h1><br><br>
-      
-      </div>
-      <span>
-        
-        <div class="container">
-    <div class="column">
-     <img id="content" src="https://cdn.pixabay.com/photo/2021/05/24/09/15/emoji-6278332_1280.png"  width="100" height="100" alt="Ma image" onclick="toggleList(this)" /> 
-     <ul class="text-list">
-      <li id="content1" onclick="replaceDiv(this)">Très motivé(e)</li>
-      <li id="content2" onclick="replaceDiv(this)">Motivé(e)</li>
-    </ul>
 
-    </div>
-    <div class="column">
+      </div>
+      <div style="margin-left: 10px; text-align: center;">
+        <h1 style="margin-bottom: 0;">C'est quoi votre humour aujourd'hui ?</h1>
+      </div>
+      <span style="text-align: center;">
+        
+   <div class="container">
+      <div class="column" style="margin-top: 0;">
+          <h3 style="margin-top: 0; padding-left: 30px;">Bien</h3>
+        <img id="content" src="https://cdn.pixabay.com/photo/2021/05/24/09/15/emoji-6278332_1280.png"  width="100" height="100" alt="Ma image" onclick="toggleList(this)" /> 
+        <ul class="text-list">
+          <li id="content1" onclick="replaceDiv(this)">Très motivé(e)</li>
+          <li id="content2" onclick="replaceDiv(this)">Motivé(e)</li>
+        </ul>
+
+      </div>
+    <div class="column" style="margin-top: 0;">
+      <h3 style="margin-top: 0; padding-left: 23px;">Neutre</h3>
       <img id="neutre" src="https://cdn-icons-png.flaticon.com/512/9489/9489992.png" width="110" height="110" alt="Ma image" onclick="toggleList(this)" />
       <ul class="text-list">
-        <li id="neutre1" onclick="replaceDiv(this)">Pas trop</li>
-        <li id="neutre2" onclick="replaceDiv(this)">Neutre</li>
-        <li id="neutre3" onclick="replaceDiv(this)">à modifier***</li>
+        <li id="neutre1" onclick="replaceDiv(this)">Rien à signaler</li>
+        <li id="neutre2" onclick="replaceDiv(this)">Occupé(e)</li>
     </ul>
       
     </div>
-    <div class="column">
+    <div class="column" style="margin-top: 0;">
+      <h3 style="margin-top: 0; padding-left: 17px;">Pas trop</h3>
       <img id="sad" src="https://cdn.pixabay.com/photo/2020/12/19/02/50/emoji-5843434_640.png" width="100" height="100" alt="Ma image" onclick="toggleList(this)" />
       <ul class="text-list">
-        <li id="sad1" onclick="replaceDiv(this)">Texte A</li>
-        <li id="sad2" onclick="replaceDiv(this)">Texte B</li>
-        <li id="sad3" onclick="replaceDiv(this)">Texte C</li>
-        <li id="sad4" onclick="replaceDiv(this)">Texte D</li>
-        <li id="sad5" onclick="replaceDiv(this)">Texte E</li>
-        <li id="sad6" onclick="replaceDiv(this)">Texte F</li>
+        <li id="sad1" onclick="replaceDiv(this)">Problème de santé</li>
+        <li id="sad2" onclick="replaceDiv(this)">Fatigué(e)</li>
+        <li id="sad3" onclick="replaceDiv(this)">Mécontent(e)</li>
+        <li id="sad4" onclick="replaceDiv(this)">Besoin de support</li>
+        <li id="sad5" onclick="replaceDiv(this)">En attente de quelque chose</li>
+        <li id="sad6" onclick="replaceDiv(this)">Très occupé(e)</li>
     </ul>
     </div>
   </div>
@@ -148,22 +165,43 @@
 
     
     <span style="margin-top: 0; margin-bottom: 0;">
-      <div class="column">
+      <div id="div2-1" class="column">
         
         <div class="column-text" style="flex-grow: 1; margin-top: 10px; margin: 20px;">
-          <h2>text eli ena nsitou ........................</h2>
-          <textarea id="myTextarea" style="width: 500px; height: 100px;" placeholder="Entrez votre texte ici"></textarea>
-          <h2>Votre Feedback: </h2>
-          <textarea id="myTextarea" style="width: 500px; height: 100px;" placeholder="Entrez votre Feedback ici"></textarea>
-          <button style="margin-left: 10px;">Valider</button>
+          <h2>Message à mon manager:</h2>
+          <textarea id="managerMessage" style="width: 500px; height: 100px;" placeholder="Entrez votre message ici" oninput="limitTextarea(this, 100)" ></textarea>
+          <h2>Feedback ou proposition anonyme: </h2>
+          <textarea id="feedbackText" style="width: 500px; height: 100px;" placeholder="Entrez votre Feedback ici" oninput="limitTextarea(this, 100)"></textarea>
+          <button type="button" style="margin-left: 10px;" onclick="replaceDiv2(this)">Valider</button>
+          
+          <p id="messageText"></p>
         </div>
+        
       
       </div>
     </span>
-    <div class="selected-image-container" style="position: fixed; top: 0; right: 0; transform: translate(-50%, 0);">
+  
+    <div class="selected-image-container" style="position: fixed; top: 0; right: 5px; transform: translate(-15%,0);">
+
       <img id="selectedImage" src="" alt="Selected Image">
+      <h2 id="selectedText" style="margin-right: 10px; margin-left: 20px; margin-top: 25px; white-space: nowrap; text-align: right;"></h2>
+      
     </div>
+    
   </div>
+
+  <!--****************** div pour affichage du message*****************-->
+  <div id="div2-2" class="containers hidden" style="width: relative; height: relative;">
+    <div class="child">
+      <h1>Merci pour votre compréhension</h1>
+    </div>
+    
+  
+  </div>
+
+
+    <!--******** Partie Javascript***************************** -->
+    
     
     <script type="text/javascript">
 
@@ -173,28 +211,25 @@
 
       microsoftTeams.initialize();
 
-microsoftTeams.getContext(function(context) {
-  //var userDisplayName = context.userDisplayName || context.upn || context.loginHint || 'Utilisateur'; // Récupère le nom d'affichage de l'utilisateur
-
+    
+//  user's name 
+  microsoftTeams.getContext(function(context) {
   var userDisplayName = context.userDisplayName || '';
-  
-  if (!userDisplayName) {
+  var firstName = '';
+
+  if (userDisplayName) {
+    // Si le nom d'affichage de l'utilisateur est disponible, récupérez le prénom en utilisant le premier mot du nom d'affichage
+    firstName = userDisplayName.split(" ")[0];
+  } else {
+    // Si le nom d'affichage n'est pas disponible, récupérez le prénom à partir de l'adresse e-mail ou de l'identifiant principal de l'utilisateur
     var email = context.userPrincipalName || context.loginHint || '';
-    userDisplayName = email.split('@')[0];
+    firstName = email.split('@')[0];
   }
-  document.getElementById("username").innerHTML="Bonjour, "+userDisplayName;
+
+  document.getElementById("username").innerHTML = "Bonjour " + firstName.toLocaleUpperCase();
 });
 
-
-
-  
-      /*
-      function toggleList(image) {
-            var textList = image.nextElementSibling;
-            textList.classList.toggle("show");
-        }
-*/
-
+// selection of the image to show or hide the list of texts
 function toggleList(image) {
   var textLists = document.querySelectorAll('.text-list'); // Sélectionner tous les éléments de classe text-list
 
@@ -210,7 +245,7 @@ function toggleList(image) {
     }
   });
 }
-
+// passage de div1 vers div2
         function replaceDiv(item) {
       document.getElementById("div1").classList.add("hidden");
       document.getElementById("div2").classList.remove("hidden");
@@ -218,6 +253,7 @@ function toggleList(image) {
       const textId = item.id;
       var imageId;
       var srcValue;
+      
       if(textId=="content1" || textId=="content2"){
         var imageElement = document.getElementById('content');
         srcValue = imageElement.src;
@@ -233,16 +269,50 @@ function toggleList(image) {
 
       const selectedImageElement = document.getElementById("selectedImage");
   selectedImageElement.src = srcValue;
+  
+  const selectedTextElement = document.getElementById("selectedText");
+  selectedTextElement.textContent = item.textContent;
       
       
     }
-
+    // pour afficher div1 
     function showDiv1() {
       document.getElementById("div1").classList.remove("hidden");
       document.getElementById("div2").classList.add("hidden");
     }
 
-    
+// ******* cette fonction est pour la validations des zones de textes
+    function limitTextarea(element, maxLength) {
+    if (element.value.length > maxLength) {
+      element.value = element.value.slice(0, maxLength);
+    }
+  }
+  
+
+  
+
+/*
+function getTenantId() {
+  microsoftTeams.getContext(function(context) {
+    var tenantId = context.tid;
+    redirectToTeams(tenantId);
+  });
+}
+
+function redirectToTeams(tenantId) {
+  var teamsUrl = "https://teams.microsoft.com/_?tenantId=" + tenantId + "&teamsNav=true";
+  window.location.href = teamsUrl;
+}
+*/
+
+
+function replaceDiv2(item) {
+      document.getElementById("div2").classList.add("hidden");
+      document.getElementById("div2-2").classList.remove("hidden");
+}
+
+
+
     </script>
   </body>
 </html>
