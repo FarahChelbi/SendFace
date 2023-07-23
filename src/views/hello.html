@@ -1,7 +1,8 @@
 <html lang="en">
   <head>
-
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.11.0/js/MicrosoftTeams.min.js"></script>
+<!-- <script src="https://statics.teams.cdn.office.net/sdk/v1.11.0/js/MicrosoftTeams.min.js"></script> -->
+<script src="https://statics.teams.microsoft.com/sdk/v1.9.1/js/MicrosoftTeams.min.js"></script>
+    
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/favicon.ico" />
@@ -12,6 +13,10 @@
       crossorigin="anonymous"
     ></script>
     <script src="/static/scripts/teamsapp.js"></script>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     
 
     <title>Microsoft Teams Tab</title>
@@ -116,7 +121,7 @@
 
       </div>
       <div style="margin-left: 10px; text-align: center;">
-        <h1 style="margin-bottom: 0;">C'est quoi votre humour aujourd'hui ?</h1>
+        <h1 style="margin-bottom: 0;">C'est quoi votre humeur aujourd'hui ?</h1>
       </div>
       <span style="text-align: center;">
         
@@ -172,7 +177,7 @@
           <textarea id="managerMessage" style="width: 500px; height: 100px;" placeholder="Entrez votre message ici" oninput="limitTextarea(this, 100)" ></textarea>
           <h2>Feedback ou proposition anonyme: </h2>
           <textarea id="feedbackText" style="width: 500px; height: 100px;" placeholder="Entrez votre Feedback ici" oninput="limitTextarea(this, 100)"></textarea>
-          <button type="button" style="margin-left: 10px;" onclick="replaceDiv2(this)">Valider</button>
+          <button id="testButton" type="button" style="margin-left: 10px;" onclick="replaceDiv2(this)">Valider</button>
           
           <p id="messageText"></p>
         </div>
@@ -211,23 +216,36 @@
 
       microsoftTeams.initialize();
 
-    
+    var personLogin;
 //  user's name 
+
   microsoftTeams.getContext(function(context) {
+    
   var userDisplayName = context.userDisplayName || '';
-  var firstName = '';
+  //var firstName = '';
+  var firstName;
 
   if (userDisplayName) {
     // Si le nom d'affichage de l'utilisateur est disponible, récupérez le prénom en utilisant le premier mot du nom d'affichage
-    firstName = userDisplayName.split(" ")[0];
+    firstName = userDisplayName.split(" ")[0]; 
+   
   } else {
     // Si le nom d'affichage n'est pas disponible, récupérez le prénom à partir de l'adresse e-mail ou de l'identifiant principal de l'utilisateur
     var email = context.userPrincipalName || context.loginHint || '';
     firstName = email.split('@')[0];
   }
+  personLogin = firstName;
 
   document.getElementById("username").innerHTML = "Bonjour " + firstName.toLocaleUpperCase();
+
 });
+
+
+
+
+
+
+
 
 // selection of the image to show or hide the list of texts
 function toggleList(image) {
@@ -246,6 +264,8 @@ function toggleList(image) {
   });
 }
 // passage de div1 vers div2
+
+var categorie;
         function replaceDiv(item) {
       document.getElementById("div1").classList.add("hidden");
       document.getElementById("div2").classList.remove("hidden");
@@ -253,25 +273,30 @@ function toggleList(image) {
       const textId = item.id;
       var imageId;
       var srcValue;
+      var imageTitle;
       
       if(textId=="content1" || textId=="content2"){
         var imageElement = document.getElementById('content');
         srcValue = imageElement.src;
+        imageTitle = "Bien";
       }
       else if(textId == "neutre1" || textId == "neutre2" || textId == "neutre3"){
         var imageElement = document.getElementById('neutre');
         srcValue = imageElement.src;
+        imageTitle = "Neutre";
       }
       else if(textId == "sad1" || textId == "sad2" || textId == "sad3" || textId == "sad4" || textId == "sad5" || textId == "sad6"){
         var imageElement = document.getElementById('sad');
         srcValue = imageElement.src;
+        imageTitle = "Pas trop";
       }
 
       const selectedImageElement = document.getElementById("selectedImage");
-  selectedImageElement.src = srcValue;
+      selectedImageElement.src = srcValue;
+      selectedImageElement.title = imageTitle;
   
-  const selectedTextElement = document.getElementById("selectedText");
-  selectedTextElement.textContent = item.textContent;
+      const selectedTextElement = document.getElementById("selectedText");
+      selectedTextElement.textContent = item.textContent;
       
       
     }
@@ -289,27 +314,78 @@ function toggleList(image) {
   }
   
 
-  
-
-/*
-function getTenantId() {
-  microsoftTeams.getContext(function(context) {
-    var tenantId = context.tid;
-    redirectToTeams(tenantId);
-  });
-}
-
-function redirectToTeams(tenantId) {
-  var teamsUrl = "https://teams.microsoft.com/_?tenantId=" + tenantId + "&teamsNav=true";
-  window.location.href = teamsUrl;
-}
-*/
-
-
 function replaceDiv2(item) {
       document.getElementById("div2").classList.add("hidden");
       document.getElementById("div2-2").classList.remove("hidden");
 }
+
+function getMonthName() {
+  const monthNames = [
+    'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet',
+    'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
+  ];
+
+  const currentDate = new Date();
+  const currentMonth = currentDate.getMonth(); // Récupérer le mois actuel (numéro de 0 à 11)
+
+  const monthName = monthNames[currentMonth]; // Récupérer le nom du mois correspondant
+
+  return monthName;
+}
+
+// event listner on the button Valider and storing data
+document.getElementById('testButton').addEventListener('click', function() {
+
+  const monthNames = [
+    'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet',
+    'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
+  ];
+  const textManager = document.getElementById("managerMessage").value;
+  const feedbackText = document.getElementById("feedbackText").value;
+
+  const selectedImageTitle = document.getElementById("selectedImage").title;
+  const selectedText = document.getElementById("selectedText").textContent;
+
+
+  const currentDate = new Date();
+  //const currentMonth = currentDate.getMonth() + 1;
+  const Month = currentDate.getMonth();
+  const currentMonth = monthNames[Month];
+  const currentYear = currentDate.getFullYear();
+  
+  const jour = currentDate.getDate();
+const mois = currentDate.getMonth() + 1;
+const annee = currentDate.getFullYear();
+const heure = currentDate.getHours();
+const minutes = currentDate.getMinutes();
+const secondes = currentDate.getSeconds();
+
+const dateEtHeureFormatees = `${jour}-${mois}-${annee} ${heure}:${minutes}:${secondes}`;
+  const timestamp = currentDate.getTime();
+
+  const data = {
+    date: dateEtHeureFormatees,
+    manager: textManager,
+    feedback: feedbackText,
+    month: currentMonth,
+    year: currentYear,
+    time: timestamp,
+    person: personLogin,
+    selectedImageTitle: selectedImageTitle, 
+    selectedText: selectedText
+
+  };
+
+  axios.post('http://localhost:5000/store_data', data)
+    .then(response => {
+      console.log(response.data);
+      // Traitez la réponse du backend ici
+    })
+    .catch(error => {
+      console.error(error);
+      // Traitez les erreurs de requête ici
+    });
+});
 
 
 

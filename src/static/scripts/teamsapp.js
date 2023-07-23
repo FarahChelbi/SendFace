@@ -15,6 +15,8 @@
       document.getElementById("hubName").innerHTML = hubName;
     }
   }
+
+  
 })();
 
 
