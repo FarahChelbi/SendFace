@@ -242,11 +242,6 @@
 
 
 
-
-
-
-
-
 // selection of the image to show or hide the list of texts
 function toggleList(image) {
   var textLists = document.querySelectorAll('.text-list'); // Sélectionner tous les éléments de classe text-list
@@ -265,7 +260,6 @@ function toggleList(image) {
 }
 // passage de div1 vers div2
 
-var categorie;
         function replaceDiv(item) {
       document.getElementById("div1").classList.add("hidden");
       document.getElementById("div2").classList.remove("hidden");
@@ -298,7 +292,6 @@ var categorie;
       const selectedTextElement = document.getElementById("selectedText");
       selectedTextElement.textContent = item.textContent;
       
-      
     }
     // pour afficher div1 
     function showDiv1() {
@@ -319,20 +312,6 @@ function replaceDiv2(item) {
       document.getElementById("div2-2").classList.remove("hidden");
 }
 
-function getMonthName() {
-  const monthNames = [
-    'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet',
-    'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
-  ];
-
-  const currentDate = new Date();
-  const currentMonth = currentDate.getMonth(); // Récupérer le mois actuel (numéro de 0 à 11)
-
-  const monthName = monthNames[currentMonth]; // Récupérer le nom du mois correspondant
-
-  return monthName;
-}
-
 // event listner on the button Valider and storing data
 document.getElementById('testButton').addEventListener('click', function() {
 
@@ -348,7 +327,6 @@ document.getElementById('testButton').addEventListener('click', function() {
 
 
   const currentDate = new Date();
-  //const currentMonth = currentDate.getMonth() + 1;
   const Month = currentDate.getMonth();
   const currentMonth = monthNames[Month];
   const currentYear = currentDate.getFullYear();
